@@ -3,6 +3,7 @@ import { connectWallet } from "../utils/walletConnection"
 
 const WalletConnectComponent: React.FC = () => {
 	const [connectedAddresses, setConnectedAddresses] = useState<string[]>([])
+	const [selectedAddress, setSelectedAddress] = useState<string | null>(null)
 
 	const handleConnectWallet = async () => {
 		try {
@@ -11,6 +12,10 @@ const WalletConnectComponent: React.FC = () => {
 		} catch (error) {
 			console.error("Error connecting wallet:", error)
 		}
+	}
+
+	const handleAddressSelect = (address: string) => {
+		setSelectedAddress(address)
 	}
 
 	return (
@@ -26,7 +31,15 @@ const WalletConnectComponent: React.FC = () => {
 					<p>Connected addresses:</p>
 					<ul>
 						{connectedAddresses.map((address, index) => (
-							<li key={index}>{address}</li>
+							<li
+								key={index}
+								className={`cursor-pointer ${
+									selectedAddress === address ? "font-bold" : ""
+								}`}
+								onClick={() => handleAddressSelect(address)}
+							>
+								{`${address.slice(0, 8)}...${address.slice(-8)}`}
+							</li>
 						))}
 					</ul>
 				</div>
