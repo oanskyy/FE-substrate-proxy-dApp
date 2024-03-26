@@ -42,6 +42,13 @@ const WalletConnectComponent: React.FC = () => {
 				</button>
 			)}
 			<div className='flex flex-col'>
+				{showSidebar && (
+					<div
+						className='fixed top-0 right-0 w-full h-full 
+						bg-talisman-dim bg-opacity-25 backdrop-blur-md '
+						onClick={() => setShowSidebar(false)}
+					></div>
+				)}
 				<div
 					className={`top-0 right-0 w-full md:w-min lg:w-[32vw] p-8 bg-talisman-sidebar text-white fixed h-full z-40 ease-in-out duration-300 ${
 						showSidebar ? "translate-x-0 " : "translate-x-full"
